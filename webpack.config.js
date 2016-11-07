@@ -1,11 +1,18 @@
 module.exports = {
-    entry: './app/js/main.js',
+    entry: ['./app/js/main.js', './app/js/secondary.js'],
     output: {
         filename: './app/js/bundle.js'
     },
-    watch: true,
 
     module: {
+        preLoaders: [
+            {
+              test: /\.js$/,
+              exclude: /node_modules/,
+              loader: 'jshint-loader'
+
+            }
+        ],
         loaders: [
             {
                 test: /\.js$/,
@@ -14,6 +21,11 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                loader: 'style!css'
             }
         ],
     }
